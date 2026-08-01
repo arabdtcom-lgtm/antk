@@ -1,0 +1,30 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "antkawy",
+  "compatibility_date": "2026-07-26",
+  "assets": {
+    "directory": "./dist",
+    "not_found_handling": "single-page-application"
+  },
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "arbvps",
+      "database_id": "5023b3e2-7133-486c-ab1d-874e88c6c5aa"
+    }
+  ],
+  "routes": [
+    {
+      "pattern": "antkawy.arbvps.com",
+      "custom_domain": true
+    },
+    {
+      "pattern": "antkawy.com",
+      "custom_domain": true
+    },
+    {
+      "pattern": "www.antkawy.com",
+      "custom_domain": true
+    }
+  ]
+}

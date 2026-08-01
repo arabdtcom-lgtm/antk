@@ -1,0 +1,216 @@
+{
+  "entities": {
+    "User": {
+      "title": "User",
+      "description": "User profile with role, balance, and preferences",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "email": { "type": "string" },
+        "role": { "type": "string", "enum": ["admin", "user"] },
+        "balance": { "type": "number" },
+        "avatar": { "type": "string" },
+        "phone": { "type": "string" },
+        "preferredCurrency": { "type": "string" },
+        "preferredLanguage": { "type": "string" }
+      },
+      "required": ["id", "name", "email", "role", "balance"]
+    },
+    "Auction": {
+      "title": "Auction",
+      "description": "An auction item with listing details, prices, and closing logic",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "titleAr": { "type": "string" },
+        "titleEn": { "type": "string" },
+        "descAr": { "type": "string" },
+        "descEn": { "type": "string" },
+        "category": { "type": "string" },
+        "image": { "type": "string" },
+        "startPrice": { "type": "number" },
+        "currentPrice": { "type": "number" },
+        "minIncrement": { "type": "number" },
+        "buyoutPrice": { "type": "number" },
+        "endTime": { "type": "string" },
+        "status": { "type": "string", "enum": ["active", "completed"] },
+        "bidsCount": { "type": "number" },
+        "viewsCount": { "type": "number" },
+        "seller": { "type": "object" },
+        "highBidder": { "type": "string" },
+        "highBidderName": { "type": "string" },
+        "itemCondition": { "type": "string" },
+        "currency": { "type": "string" },
+        "createdDate": { "type": "string" },
+        "softCloseMinutes": { "type": "number" },
+        "trackingNumber": { "type": "string" },
+        "carrier": { "type": "string" }
+      },
+      "required": ["id", "titleAr", "titleEn", "category", "startPrice", "currentPrice", "endTime", "status"]
+    },
+    "Bid": {
+      "title": "Bid",
+      "description": "A single bid placed on an auction",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "auctionId": { "type": "string" },
+        "bidderName": { "type": "string" },
+        "bidderEmail": { "type": "string" },
+        "amount": { "type": "number" },
+        "timestamp": { "type": "string" }
+      },
+      "required": ["id", "auctionId", "bidderName", "bidderEmail", "amount", "timestamp"]
+    },
+    "SupportTicket": {
+      "title": "SupportTicket",
+      "description": "A support ticket submitted by a user",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "email": { "type": "string" },
+        "name": { "type": "string" },
+        "subject": { "type": "string" },
+        "message": { "type": "string" },
+        "status": { "type": "string", "enum": ["open", "answered"] },
+        "reply": { "type": "string" },
+        "timestamp": { "type": "string" }
+      },
+      "required": ["id", "email", "name", "subject", "message", "status", "timestamp"]
+    },
+    "Shipment": {
+      "title": "Shipment",
+      "description": "Shipment tracking details for purchased auction items",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "auctionId": { "type": "string" },
+        "auctionTitleAr": { "type": "string" },
+        "auctionTitleEn": { "type": "string" },
+        "buyerEmail": { "type": "string" },
+        "carrier": { "type": "string" },
+        "trackingNumber": { "type": "string" },
+        "status": { "type": "string" },
+        "estimatedDelivery": { "type": "string" },
+        "history": { "type": "array" }
+      },
+      "required": ["id", "auctionId", "buyerEmail", "status"]
+    },
+    "EscrowTransaction": {
+      "title": "EscrowTransaction",
+      "description": "An escrow transaction holding funds safely",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "auctionId": { "type": "string" },
+        "auctionTitleAr": { "type": "string" },
+        "auctionTitleEn": { "type": "string" },
+        "amount": { "type": "number" },
+        "currency": { "type": "string" },
+        "buyerEmail": { "type": "string" },
+        "sellerName": { "type": "string" },
+        "status": { "type": "string", "enum": ["held", "released"] },
+        "createdAt": { "type": "string" },
+        "paymentMethod": { "type": "string" },
+        "paymentDetails": { "type": "string" }
+      },
+      "required": ["id", "auctionId", "amount", "buyerEmail", "status", "createdAt"]
+    },
+    "BackupLog": {
+      "title": "BackupLog",
+      "description": "Log entry for manual or auto backups",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "timestamp": { "type": "string" },
+        "type": { "type": "string" },
+        "status": { "type": "string" },
+        "size": { "type": "string" },
+        "file": { "type": "string" }
+      },
+      "required": ["id", "timestamp", "type", "status", "size", "file"]
+    },
+    "ApiKey": {
+      "title": "ApiKey",
+      "description": "API keys generated for clients",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "clientName": { "type": "string" },
+        "key": { "type": "string" },
+        "createdAt": { "type": "string" },
+        "status": { "type": "string" }
+      },
+      "required": ["id", "clientName", "key", "createdAt", "status"]
+    },
+    "SystemLog": {
+      "title": "SystemLog",
+      "description": "Internal logs for audits",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "timestamp": { "type": "string" },
+        "type": { "type": "string" },
+        "message": { "type": "string" },
+        "user": { "type": "string" }
+      },
+      "required": ["id", "timestamp", "type", "message"]
+    },
+    "SystemSettings": {
+      "title": "SystemSettings",
+      "description": "Global administration settings",
+      "type": "object",
+      "properties": {
+        "autoBackupIntervalHours": { "type": "number" },
+        "systemNotificationEmail": { "type": "string" },
+        "escrowReleaseTimeoutDays": { "type": "number" },
+        "allowManualBidApproval": { "type": "boolean" },
+        "maintenanceMode": { "type": "boolean" }
+      },
+      "required": ["autoBackupIntervalHours", "systemNotificationEmail", "escrowReleaseTimeoutDays", "allowManualBidApproval", "maintenanceMode"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": { "$ref": "#/entities/User" },
+      "description": "User accounts and preferences"
+    },
+    "/auctions/{auctionId}": {
+      "schema": { "$ref": "#/entities/Auction" },
+      "description": "Active and completed auction listings"
+    },
+    "/bids/{bidId}": {
+      "schema": { "$ref": "#/entities/Bid" },
+      "description": "Bids placed across all auctions"
+    },
+    "/tickets/{ticketId}": {
+      "schema": { "$ref": "#/entities/SupportTicket" },
+      "description": "Customer support tickets"
+    },
+    "/shipments/{shipmentId}": {
+      "schema": { "$ref": "#/entities/Shipment" },
+      "description": "Shipment tracking and history"
+    },
+    "/escrows/{escrowId}": {
+      "schema": { "$ref": "#/entities/EscrowTransaction" },
+      "description": "Escrow transactions for completed purchases"
+    },
+    "/backupLogs/{backupLogId}": {
+      "schema": { "$ref": "#/entities/BackupLog" },
+      "description": "Database backup logs"
+    },
+    "/apiKeys/{apiKeyId}": {
+      "schema": { "$ref": "#/entities/ApiKey" },
+      "description": "External client API integration keys"
+    },
+    "/logs/{logId}": {
+      "schema": { "$ref": "#/entities/SystemLog" },
+      "description": "Internal audit trails"
+    },
+    "/settings/system": {
+      "schema": { "$ref": "#/entities/SystemSettings" },
+      "description": "Global settings parameters"
+    }
+  }
+}

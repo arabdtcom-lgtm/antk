@@ -1,0 +1,11 @@
+{
+  "name": "أنتيكاوي",
+  "description": "منصة مزادات أنتيكاوي الفاخرة المتكاملة تدعم المزايدات الفورية، لوحة تجكم إدارية، الدفع الآمن ونظام الضمان، تتبع الشحنات، الدعم الفني، والتحليلات المتقدمة باللغتين العربية والإنجليزية.",
+  "requestFramePermissions": [
+    "camera",
+    "geolocation"
+  ],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
